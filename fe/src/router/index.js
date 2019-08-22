@@ -10,6 +10,15 @@ import Home from '../controllers/home'
 // 添加新的路由
 import Video from '../controllers/video'  
 
+// sme-router中间件
+router.use((req, res, next) =>{
+    $(`.sidebar-menu li.nav a[href="/#${req.url}"]`)
+    .parent()
+    .addClass('active')
+    .siblings()
+    .removeClass('active')
+})
+
 router.route('/',Home.render)
 // router.route('./video',Video.render)  //带点就不行，路径一定得写对
 router.route('/video',Video.render)

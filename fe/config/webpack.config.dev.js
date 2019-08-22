@@ -15,7 +15,13 @@ module.exports = {
     // 做web-dev-server的配置  需要本地安装 webpack-dev-server
     devServer: {
         contentBase: path.resolve(__dirname, '../dev'),
-        port: 8000
+        port: 8000,
+         // 设置服务器代理
+        proxy:{
+            "/api": {   // '/api'  '/api'     '/api'  不是 'api' 一定得加'/'
+                target: 'http://localhost:3000'
+             }
+        }
     },
     // loaders
     module:{
@@ -23,6 +29,10 @@ module.exports = {
             {
                 test: /\.art$/,
                 loader: 'art-template-loader'
+            },
+            {
+                test: /\.(scss|css)$/,
+                loader: ['style-loader', 'css-loader', 'sass-loader']
             }
         ]
     },
@@ -44,6 +54,4 @@ module.exports = {
             to: './public'
         }])
     ]
-    
-
 }

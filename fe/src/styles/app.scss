@@ -1,0 +1,21 @@
+$layout:inline-block;
+.hidden-xs{
+    display: $layout;
+    // display: inline-block;
+    height: 100%;
+    line-height: 50px;
+    color: #fff;
+    margin: 0 10px;
+}
+#user-menu{
+    height: 50px;
+    > a{
+        padding: 0;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+// bootstrap栅格布局，随着屏幕的大小而变化，这些样式在浏览器全屏才能更好地显示效果
