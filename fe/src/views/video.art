@@ -3,6 +3,7 @@
     <h3 class="box-title">Bordered Table</h3>
 </div>
 <!-- /.box-header -->
+
 <div class="box-body">
     <table class="table table-bordered">
     <tbody><tr>
@@ -11,9 +12,10 @@
         <th>Progress</th>
         <th style="width: 40px">Label</th>
     </tr>
+    {{each list}}
     <tr>
-        <td>1.</td>
-        <td>Update software</td>
+        <td>{{$index + 1}}</td>
+        <td>{{$value.task}}</td>
         <td>
         <div class="progress progress-xs">
             <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
@@ -21,6 +23,10 @@
         </td>
         <td><span class="badge bg-red">55%</span></td>
     </tr>
+    {{/each}}
+    
+
+<!--
     <tr>
         <td>2.</td>
         <td>Clean database</td>
@@ -51,6 +57,9 @@
         </td>
         <td><span class="badge bg-green">90%</span></td>
     </tr>
+ -->
+
+
     </tbody></table>
 </div>
 <!-- /.box-body -->

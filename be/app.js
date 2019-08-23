@@ -3,15 +3,26 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+// 引入cookie-session
+var cookieSession = require('cookie-session')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+//  引入新的路由
+ var videoRouter = require('./routes/video')
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+// cookie-session的设置
+app.use(cookieSession({
+  name: 'session',
+  keys:['key1', 'key2'],  //不能缺省
+  maxAge: 24 * 60 * 60 * 1000
+}))
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -22,6 +33,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 app.use('/api/users', usersRouter);
+// 拦截器 的路由
+app.use('/api/video',videoRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -9,6 +9,8 @@ const router = new SMERouter('router-view','hash')
 import Home from '../controllers/home'
 // 添加新的路由
 import Video from '../controllers/video'  
+// 头部的用户的路由
+import User from '../controllers/user'
 
 // sme-router中间件
 router.use((req, res, next) =>{
@@ -25,5 +27,8 @@ router.route('/video',Video.render)
 
 // 提高用户体验，重定向到根目录之下
 router.redirect('/')
+
+// 把首次渲染页面渲染用户信息放在这里，没有把它单独出去，没有更合适的位置
+User.render()   
 
 export default router
