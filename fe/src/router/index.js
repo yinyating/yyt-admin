@@ -24,9 +24,12 @@ router.use((req, res, next) =>{
 router.route('/',Home.render)
 // router.route('./video',Video.render)  //带点就不行，路径一定得写对
 router.route('/video',Video.render)
-
+// router.route('/video-list',Video.render)
+router.route('/video-add',Video.add)
+router.route('/video-edit',Video.edit)
 // 提高用户体验，重定向到根目录之下
-router.redirect('/')
+// 为方便调试，重定向到video 之下
+router.redirect('/video')
 
 // 把首次渲染页面渲染用户信息放在这里，没有把它单独出去，没有更合适的位置
 User.render()   
