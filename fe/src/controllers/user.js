@@ -1,19 +1,15 @@
 // 用户信息模块的逻辑处理
-
-// 加载ejs模板引擎
-import userView from '../views/user.art'
+import userView from '../views/user.art'  // 加载ejs模板引擎
 
 let _url = ''
 let _type = ''
 
 export default {
     async render(){
-        // 获取数据的，使用了ajax,都需要使用async和await
-        let result = await this.isSignin()  
+        let result = await this.isSignin()   // 获取数据的，使用了ajax,都需要使用async和await
         // 加载数据并渲染用户名界面
         let html = userView({
-            //  isSignin: false
-             isSignin: result.ret,
+             isSignin: result.ret,   //  isSignin: false
              username: result.data.username
         })
         $('.user-menu').html(html)
@@ -26,8 +22,7 @@ export default {
             url:'/api/users/isSignin',
             dataType: 'json',
             success(result){
-                // console.log(result.ret,result.username)
-                return result
+                return result   // console.log(result.ret,result.username)
             }
         })
     },
@@ -44,18 +39,16 @@ export default {
            let data = $('#user-form').serialize()
            $.ajax({
                url: _url,
-               type: 'POST',
-            //    dataType:'json',
+               type: 'POST',   // dataType:'json' //后端设置好了反应头，不需要再设置此格式
                data,
                success: this.bindEventSucc.bind(this),
-                error: this.bindEventError.bind(this)
+               error: this.bindEventError.bind(this)
            })
        })
        // 登录成功之后的退出按钮
        $('#btn-signout').on('click',()=>{
            $.ajax({
-               url: '/api/users/isSignout',
-            //    dataType: 'json',
+               url: '/api/users/isSignout',   //  dataType: 'json',
                success: this.bindEventSucc.bind(this),
                error: this.bindEventError.bind(this)
            })
@@ -74,6 +67,8 @@ export default {
                 $('.user-menu').html(html)
                 // 因为退出是动态加载的页面，这里提前刷新，不然会退不出去
                 location.reload()  
+                // // 为了登录准备的   // 测试在此不怎么好用
+                //  _type = ''
             }else{
                 alert(result.data.msg)
             }

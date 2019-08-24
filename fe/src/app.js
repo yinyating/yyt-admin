@@ -1,5 +1,4 @@
-// import './router/index'
-import './router/'
+import './router/'  // import './router/index' 的简写
 
 import './styles/app.scss'
 

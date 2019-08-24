@@ -8,6 +8,7 @@ export default {
    render(req, res, next){
       // console.log(req)
     //    res.render('hello home')
+    //   res.render(homeView(), {})
      res.render(homeView(req))
    }
 }

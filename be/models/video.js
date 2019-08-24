@@ -21,6 +21,7 @@ module.exports = {
     },
     // 查找出某一条记录 根据id
     findone(id){
+        // return Videos.findById(id)
         return Videos.findById({_id:id})
     },
     // 修改之后，更新修改的那条数据记录

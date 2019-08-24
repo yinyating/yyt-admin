@@ -14,6 +14,7 @@ module.exports = {
     },
     // 做web-dev-server的配置  需要本地安装 webpack-dev-server
     devServer: {
+        // contentBase: './dev',  // 二者等价
         contentBase: path.resolve(__dirname, '../dev'),
         port: 8000,
          // 设置服务器代理

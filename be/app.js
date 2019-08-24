@@ -7,9 +7,10 @@ var logger = require('morgan');
 var cookieSession = require('cookie-session')
 
 var indexRouter = require('./routes/index');
+// 用户信息的路由
 var usersRouter = require('./routes/users');
 //  引入新的路由
- var videoRouter = require('./routes/video')
+var videoRouter = require('./routes/video')
 
 var app = express();
 
@@ -32,8 +33,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 // app.use('/users', usersRouter);
+// 用户 的路由
 app.use('/api/users', usersRouter);
-// 拦截器 的路由
+// video 的路由
 app.use('/api/video',videoRouter)
 
 // catch 404 and forward to error handler

@@ -38,6 +38,7 @@ module.exports = {
        }
     },
 
+    // 查找出某一条数据
     async findone(req, res, next){
         res.set('content-type','application/json;charset=utf-8')
         let result = await videoModel.findone(req.body.id)
@@ -49,16 +50,13 @@ module.exports = {
         }
     },
 
+    // 修改了某一条数据
     async put(req, res, next){
         res.set('content-type','application/json;charset=utf-8')
         let result = await videoModel.put({
             ...req.body,
-            createTime: moment().format('YYYY-MM-DD hh:mm:ss')
+            createTime: moment().format('YYYY-MM-DD hh:mm:ss')  //修改之后创建时间会更新，根据需求按需求是否再按时间倒序排序
         })
-        // if(result){
-        //     console.log(result)
-        // }
-        // res.json(result)
         res.render('succ', {
             data: JSON.stringify({
               msg: '数据修改成功.'  
@@ -66,6 +64,7 @@ module.exports = {
         })
     },
 
+    // 删除某一条数据
     async remove(req, res, next){
         let result = await videoModel.remove(req.body.id)
         res.render('succ', {

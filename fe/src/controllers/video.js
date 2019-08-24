@@ -6,12 +6,12 @@ function remove(id, res){
     $.ajax({
         url: '/api/video/remove',
         type: 'DELETE',
-        data: {
-            id
+        data: {  
+            id   // id: id
         },
         success(result){
             if (result.ret) {
-                res.go('/video?_=' + new Date().getTime())   // 加个query,改变路由，实现无刷新页面呈现出删除数据之后的列表
+                res.go('/video?_=' + new Date().getTime())  // 加个query,改变路由，实现无刷新页面呈现出删除数据之后的列表
             }
         }
     })
@@ -21,8 +21,7 @@ export default {
     render(req, res, next){
         $.ajax({
             url: '/api/video/list',
-            success(result){
-                // console.log(result)
+            success(result){      // console.log(result)
                 if (result.ret) {    // ajax请求成功，直接渲染请求返回数据
                     res.render(videoView({  
                         list: result.data
@@ -60,8 +59,7 @@ export default {
                 url: '/api/video/save',
                 type: 'POST',
                 data,
-                success(result){
-                    // console.log(result)
+                success(result){     // console.log(result)
                     if (result.ret) {
                         res.back()
                     } else {
@@ -71,8 +69,7 @@ export default {
             })
         })
     },
-    edit(req, res, next){
-        // console.log(req)
+    edit(req, res, next){   // console.log(req)
         // 先做ajax请求，在渲染修改的表单页面
         $.ajax({
             url: '/api/video/findone',
@@ -82,19 +79,17 @@ export default {
             }, 
             success(result){
                 res.render(videoEdit(result.data))
-                // render之后绑定
+                // render之后再绑定
                 $('#posback').on('click', () => {
                     res.back()
                 })
                 // 修改之后的提交按钮
                 $('#possubmit').on('click', () => {
-                   let data = $('#posedit').serialize()
-                //    console.log(data)
-                //    console.log( data + '&id=' + req.body.id)
+                   let data = $('#posedit').serialize()   //console.log(data)
                    $.ajax({
                        url: '/api/video/put',
                        type: 'PUT',
-                       data: data + '&id=' + req.body.id,       // data除了可以传数据，可以传字符串
+                       data: data + '&id=' + req.body.id,  // data除了可以传数据，可以传字符串
                        success(result){
                            if(result.ret){
                                res.back()
@@ -106,7 +101,5 @@ export default {
                 })
             }
         })
-       
-       
     }
 }
