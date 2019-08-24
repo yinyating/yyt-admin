@@ -10,9 +10,16 @@ const Videos = mongoose.model('videos',{
 })
 
 module.exports = {
-    // 查找出所有的数据记录
-    find(){
-        return Videos.find({}).sort({_id: -1})
+    // // 查找一堆数据
+    // find(){
+    //     // return Videos.find({}).sort({_id: -1})  // 查找出所有的数据记录
+    // },
+    find({start, count}){   // ~~可以快速高效的把字符串转化为数值类型
+        return {
+            list: Videos.find({}).sort({_id:-1}).skip(~~start).limit(~~count),  // 找出分页的页码对应的数据
+            total: Videos.count({})   // 找出数据库中的总的数目 ({})
+        }
+      
     },
     // 保存提交的一条数据记录
     save(data){

@@ -3,11 +3,15 @@ const moment = require('moment')
 module.exports = {
     async list(req, res, next){
         res.set('content-type','application/json;charset=utf-8')
-        let result = await videoModel.find()
-        // console.log(result)
-        if (result) {
+        // let result = await videoModel.find()      // console.log(result)
+        let {list, total} =  videoModel.find(req.query)
+        if (await list) {
             res.render('succ', {
-                data: JSON.stringify(result)
+                // data: JSON.stringify(result)
+                data: JSON.stringify({
+                    list: await list,
+                    total: await total
+                })
             })
         }
     },
